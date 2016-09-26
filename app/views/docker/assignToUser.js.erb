@@ -1,0 +1,9 @@
+<% if @record && @record.errors.any? %>
+  alert("<%= @record.errors.full_messages.to_sentence %>");
+<% else %>
+  var ele = $("form:contains('<%= "#{@image_name}" %>')").find(".color-success")[0];
+  setTimeout(function() {
+    ele.value = "Add";
+  }, 3000);
+  ele.value = "Added";
+<% end %>

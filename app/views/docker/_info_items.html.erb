@@ -1,0 +1,26 @@
+<% images.each do |key, image| %>
+  <%= form_tag assignToUser_path, remote: :true do %>
+    <div class="info-item">
+      <div class="info-item-cover">
+        <img src="http://c-nergy.be/blog/wp-content/uploads/Logo_ub14.png">
+      </div>
+      <div class="info-item-content">
+        <h4 class="info-item-title"><%= key %>&nbsp;:&nbsp;<%= select_tag :image_tag, options_for_select(image.map { |e| e.tag }) %></h4>
+        <div class="metas">
+          <span class="meta">Created by <a>Admin</a></span>
+          <span class="meta">2016-09-12 PM 04:00</span>
+        </div>
+        <p class="info-item-text"><%= image[0].description%></p>
+        <div class="info-item-bottom">
+          <span class="label"><%= key %></span>
+          <%= hidden_field_tag :image_name, key %>
+        </div>
+      </div>
+      <div class="info-item-addon">
+        <div class="btn-grp color-common">
+          <%= submit_tag "Add", :class => "btn color-success" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wardrobe</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/kule.lazy/3.1.160704/css/kule-lazy.min.css" data-turbolinks-track="true" />
+  <link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/kule.lazy/3.1.160704/css/kule-theme-default.min.css" data-turbolinks-track="true" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/kule.lazy/3.1.160704/js/kule.urbrowser.min.js" data-turbolinks-track="true"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <%= render 'layouts/header' %>
+  <div class="container">
+    <% if notice %>
+        <p class="alert alert-notice tp"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+        <p class="alert alert-error tp"><%= alert %></p>
+    <% end %>
+    <%= yield %>
+    <%= render 'layouts/footer' %>
+    <div class="columns-12">
+      <div class="col-sm-12">
+        <div class="panel">
+          <div class="panel-box">
+            <%= debug(params) if Rails.env.development? %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function() {
+      $("#crumb").append("<li class=\"crumb-end\"><%= action_name %></li>");
+    });
+  </script>
+</body>
+</html>

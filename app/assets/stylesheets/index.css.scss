@@ -1,0 +1,10 @@
+.instance-loding {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background: rgba(63, 63, 63, 0.38);
+}
+
+.instance-loding .loading, .instance-loding .overlay {
+  position: absolute;
+}

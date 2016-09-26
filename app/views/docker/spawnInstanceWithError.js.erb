@@ -1,0 +1,3 @@
+var ele = $("form:contains('<%= @image_name + " : " + @image_tag%>')");
+ele.find(".terminal-button").removeClass('sending').blur();
+sweetAlert("Oops...", "Try again later...", "error");

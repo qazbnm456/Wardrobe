@@ -1,0 +1,79 @@
+var ele = $("form:contains('<%= @image_name + " : " + @image_tag%>')");
+<% if @commit != "" %>
+  ele.find(".meta").last().html('<%= "Status: #{@record.status}" %>');
+  <% if @commit == "Start" %>
+    ele.find(".color-success").toggleClass("color-success color-warning");
+    ele.find(".color-warning")[0].value = "Eliminate";
+  <% elsif @commit == "Eliminate" %>
+    ele.find(".color-warning").toggleClass("color-warning color-success");
+    ele.find(".color-success")[0].value = "Start";
+  <% elsif @commit == "Remove" %>
+    ele.fadeOut();
+  <% end %>
+<% else %>
+  ele.find(".terminal-button").removeClass('sending').blur();
+  var term,
+      protocol,
+      socketURL,
+      socket,
+      pid,
+      charWidth,
+      charHeight;
+
+  var terminalContainer = ele.find('.terminal-container')[0],
+      colsElement = document.getElementById('cols'),
+      rowsElement = document.getElementById('rows');
+
+  function setTerminalSize () {
+    var cols = parseInt(colsElement.value),
+        rows = parseInt(rowsElement.value),
+        width = (cols * charWidth).toString() + 'px',
+        height = (rows * charHeight).toString() + 'px';
+
+    terminalContainer.style.width = width;
+    terminalContainer.style.height = height;
+    term.resize(cols, rows);
+  }
+
+  colsElement.addEventListener('change', setTerminalSize);
+  rowsElement.addEventListener('change', setTerminalSize);
+
+  createTerminal();
+
+  function createTerminal() {
+    // Clean terminal
+    while (terminalContainer.children.length) {
+      terminalContainer.removeChild(terminalContainer.children[0]);
+    }
+    term = new Terminal({
+      cursorBlink: true
+    });
+    socketURL = '<%= "#{@ws}" %>';
+
+    term.open(terminalContainer);
+    term.fit();
+
+    var initialGeometry = term.proposeGeometry(),
+        cols = initialGeometry.cols,
+        rows = initialGeometry.rows;
+
+    colsElement.value = cols;
+    rowsElement.value = rows;
+
+    socket = new WebSocket(socketURL);
+    socket.onopen = runRealTerminal;
+    socket.onclose = onClose;
+    socket.onerror = onError;
+  }
+
+  function runRealTerminal() {
+    term.attach(socket);
+    term._initialized = true;
+  }
+
+  function onClose() {
+    term.writeln('Session terminated');
+  }
+
+  function onError() {}
+<% end %>

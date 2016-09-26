@@ -1,0 +1,3 @@
+$("#loader").fadeIn("slow");
+$("#instances").empty().append("<%= escape_javascript(render "user_info_items", :user => @user, :images => @available) %>");
+$("#loader").fadeOut("fast");

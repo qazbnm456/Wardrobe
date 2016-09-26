@@ -1,0 +1,44 @@
+<div class="navbar">
+  <div class="navbar-header">
+    <a class="navbar-toggle right"></a>
+    <ul class="navbar-brand crumb" id="crumb">
+      <li class="crumb-item">
+        <%= link_to "Wardrobe", root_path, :id => "logo", :class => "crumb-link", :style => "text-decoration: none" %>
+      </li>
+    </ul>
+  </div>
+  <div class="navbar-content">
+    <ul class="navbar-nav right">
+      <li class="navbar-nav-item"><%= link_to "About", about_path, :class => "navbar-nav-link" %></li>
+      <% if user_signed_in? %>
+          <li id="fat-menu" class="navbar-nav-item drop drop-hover">
+            <a class="navbar-nav-link drop-btn">
+              <%= current_user.email %> <span class="caret"></span>
+            </a>
+            <ul class="drop-box drop-down-right menu">
+              <li class="menu-item"><%= link_to show_user_path(current_user), :class => "menu-link" do %>
+                <%= fa_icon "home" %>
+                <%= "Profile" %>
+              <% end %></li>
+              <li class="menu-item"><%= link_to edit_user_registration_path, :class => "menu-link" do %>
+                <%= fa_icon "edit" %>
+                <%= "Edit" %>
+              <% end %></li>
+              <% if current_user.admin? %>
+                <li class="menu-item"><%= link_to rails_admin_path, :class => "menu-link" do %>
+                  <%= fa_icon "flag" %>
+                  <%= "Admin" %>
+                <% end %>
+              <% end %></li>
+              <li class="menu-item"><%= link_to destroy_user_session_path, :method=>'delete' , :class => "menu-link" do %>
+                <%= fa_icon "power-off" %>
+                <%= "Sign out" %>
+              <% end %></li>
+            </ul>
+          </li>
+      <% else %>
+          <li class="navbar-nav-item"><%= link_to "Sign in", new_user_session_path, :class => "navbar-nav-link" %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

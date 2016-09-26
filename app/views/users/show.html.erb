@@ -1,0 +1,26 @@
+<div class="panel">
+  <div class="panel-header">
+    <%= form_tag getUserImages_path, remote: :true do %>
+        <div class="info-item">
+          <div class="info-item-content">
+            <h3 class="panel-title">Your Instances</h3>
+          </div>
+          <div class="info-item-addon">
+            <%= submit_tag "Refresh", :class => "btn-outline color-success", :id => "refresh" %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+  <div class="instance-loding" id="loader">
+    <div class="loading">
+      <span class="loading-text">Loading</span>
+    </div>
+    <div class="overlay"></div>
+  </div>
+  <div class="panel-box" id="instances"></div>
+</div>
+<script>
+  $(document).on('turbolinks:load', function() {
+    document.getElementById("refresh").click();
+  });
+</script>

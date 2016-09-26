@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+require 'rails/commands/server'
+require 'rack'
+require 'webrick/https'
+
+# launch WEBrick with ssl terminal
+module Rails
+  class Server < ::Rack::Server
+    def default_options
+      environment  = ENV['RACK_ENV'] || 'development'
+      if environment == 'development'
+        cert_name = [
+            ["CN", "localhost", OpenSSL::ASN1::PRINTABLESTRING],
+        ]
+        super.merge({
+          :SSLEnable => true,
+          :SSLCertName => cert_name
+        });
+      else
+        super
+      end
+    end
+  end
+end
+
+APP_PATH = File.expand_path('../../config/application', __FILE__)
+require_relative '../config/boot'
+require 'rails/commands'

@@ -1,0 +1,56 @@
+<% images.each do |status, image| %>
+    <%= form_tag spawnInstance_path, remote: :true do %>
+      <div class="info-item">
+        <div class="info-item-cover">
+          <img src="http://c-nergy.be/blog/wp-content/uploads/Logo_ub14.png">
+        </div>
+        <div class="info-item-content">
+          <h4 class="info-item-title"><%= image.name + " : " + image.tag%></h4>
+          <div class="metas">
+            <span class="meta">Created by <a><%= link_to @user.name, user_path(@user) %></a></span>
+            <span class="meta">Created <%= image.date %></span>
+            <span class="meta">Status: <%= status %></span>
+          </div>
+          <p class="info-item-text">~略~</p>
+          <div class="info-item-bottom">
+            <span class="label"><%= image.name %></span>
+            <%= hidden_field_tag :image_name, image.name %>
+            <%= hidden_field_tag :image_tag, image.tag %>
+          </div>
+        </div>
+        <div class="info-item-addon">
+          <div class="btn-grp color-common">
+            <% if status == "active" %>
+              <%= submit_tag "Eliminate", :class => "btn color-warning" %>
+            <% else %>
+              <%= submit_tag "Start", :class => "btn color-success" %>
+            <% end %>
+            <%= submit_tag "Remove", :class => "btn color-error" %>
+            <%= button_tag "Terminal", :name => "commit", :class => "btn terminal-button" %>
+          </div>
+        </div>
+      </div>
+      <div class="terminal-container"></div>
+      <div>
+        <div>
+          <h3>Size</h3>
+          <div>
+            <div style="display: inline-block; margin-right: 16px;">
+              <label for="cols">Columns</label>
+              <input type="number" id="cols" />
+            </div>
+            <div style="display: inline-block; margin-right: 16px;">
+              <label for="rows">Rows</label>
+              <input type="number" id="rows" />
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+<% end %>
+<script>
+  $(".terminal-button").on('click', function(){
+      var $this = $(this);
+      $this.toggleClass('sending').blur();
+  });
+</script>
