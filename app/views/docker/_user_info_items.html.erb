@@ -7,7 +7,7 @@
         <div class="info-item-content">
           <h4 class="info-item-title"><%= image.name + " : " + image.tag%></h4>
           <div class="metas">
-            <span class="meta">Created by <a><%= link_to @user.name, user_path(@user) %></a></span>
+            <span class="meta">Created by <a><%= link_to @user.name, show_user_path(@user) %></a></span>
             <span class="meta">Created <%= image.date %></span>
             <span class="meta">Status: <%= status %></span>
           </div>

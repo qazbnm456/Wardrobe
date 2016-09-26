@@ -11,6 +11,9 @@ RUN /pd_build/utilities.sh
 #   Ruby support.
 RUN /pd_build/ruby-2.3.1.sh
 
+RUN apt-get update \
+  && apt-get install -y sudo
+
 WORKDIR /tmp
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock

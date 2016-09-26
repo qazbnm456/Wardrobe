@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20160926124343) do
     t.string   "name",                   limit: 255
     t.boolean  "admin",                  limit: 1,   default: false
     t.string   "stackId",                limit: 255, default: ""
-    t.integer  "count",                  limit: 4,   default: 1
+    t.integer  "count",                  limit: 4,   default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

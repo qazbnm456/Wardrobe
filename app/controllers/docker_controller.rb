@@ -32,17 +32,29 @@ class DockerController < ApplicationController
 
   def assignToUser
     @user = current_user
-    @image_name = instances_params[:image_name]
-    @image_tag = instances_params[:image_tag]
-    @record = Record.new
-    @record.user = @user
-    @record.image = Image.find_by({name: @image_name, tag: @image_tag})
-    p = Rancher::Api::Project.all.first
-    s = p.stacks.find("#{@user.stackId}")
-    s.create_service_with_name(getInstanceName(@user.email + "-1-" + @image_name + "-1-" + @image_tag), @image_name, @image_tag, s.id, p.id)
-    @record.save
-    respond_to do |format|
-      format.js
+    if @user.count < 1
+      @user.count += 1
+      @image_name = instances_params[:image_name]
+      @image_tag = instances_params[:image_tag]
+      @record = Record.new
+      @record.user = @user
+      @record.image = Image.find_by({name: @image_name, tag: @image_tag})
+      p = Rancher::Api::Project.all.first
+      s = p.stacks.find("#{@user.stackId}")
+      s.create_service_with_name(getInstanceName(@user.email + "-1-" + @image_name + "-1-" + @image_tag), @image_name, @image_tag, s.id, p.id)
+      @record.save
+      if @record && @record.errors.any?
+        @user.count -= 1
+      end
+      @user.save
+      respond_to do |format|
+        format.js
+      end
+    else
+      redirect_to(
+          main_app.root_path,
+          :flash => { :alert => "You've excess the limit." }
+      )
     end
   end
 
@@ -64,6 +76,8 @@ class DockerController < ApplicationController
       elsif @commit == "Remove"
         p.services.where(:name => getInstanceName(@user.email + "-1-" + @image_name + "-1-" + @image_tag))[0].remove
         @record.destroy
+        @user.count -= 1
+        @user.save
       end
     else
       @container = p.services.where(:name => getInstanceName(@user.email + "-1-" + @image_name + "-1-" + @image_tag))[0].instances[0].terminal(%w(/bin/sh -c TERM=xterm-256color;\ export\ TERM;\ [\ -x\ /bin/bash\ ]\ &&\ ([\ -x\ /usr/bin/script\ ]\ &&\ /usr/bin/script\ -q\ -c\ "/bin/bash"\ /dev/null\ ||\ exec\ "/bin/bash")\ ||\ exec\ /bin/sh))
