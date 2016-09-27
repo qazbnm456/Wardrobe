@@ -12,7 +12,7 @@ RUN /pd_build/utilities.sh
 RUN /pd_build/ruby-2.3.1.sh
 
 RUN apt-get update \
-  && apt-get install -y sudo
+  && apt-get install -y sudo lxc
 
 WORKDIR /tmp
 COPY Gemfile Gemfile
@@ -25,7 +25,7 @@ RUN chown -R app.app /tmp \
 RUN rm -f /etc/service/nginx/down \
   && rm /etc/nginx/sites-enabled/default
 
-COPY wardrobe.conf /etc/nginx/sites-available/wardrobe.conf
+COPY wardrobe.conf /etc/nginx/sites-enabled/wardrobe.conf
 COPY rails-env.conf /etc/nginx/main.d/rails-env.conf
 
 COPY . /home/app/wardrobe
