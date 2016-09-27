@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
   end
 
   def emailSubstitude(email)
-    email.gsub("@", "-0-").gsub(".", "-").gsub("_", "-").gsub("/", "-")
+    email.tr("[]/_@.", "-")
   end
 
   def getInstanceName(ready)

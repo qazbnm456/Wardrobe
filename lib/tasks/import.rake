@@ -1,6 +1,6 @@
 desc "Import images to database"
 namespace :docker do
-  task import_images: :environment do
+  task import: :environment do
     cmd = "docker images | awk '{ if(NR!=1) {print $1 \",\" $2} }'"
     stdout, _, _ = Open3.capture3(cmd)
     available = stdout.split("\n")
