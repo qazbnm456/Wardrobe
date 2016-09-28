@@ -66,7 +66,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.default_url_options = { protocol: 'https', host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { protocol: "https", host: "#{ENV['MAIL_HOST']}" }
   config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
