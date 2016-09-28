@@ -72,6 +72,9 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-glyphicons (0.0.1)
+      railties (>= 3.0)
+      sass (>= 3.2)
     builder (3.2.2)
     chunky_png (1.3.7)
     coderay (1.1.1)
@@ -270,6 +273,7 @@ DEPENDENCIES
   activerecord-mysql-unsigned
   better_errors
   binding_of_caller
+  bootstrap-glyphicons
   compass-rails
   devise
   dotenv-rails

@@ -26,6 +26,7 @@ gem 'font-awesome-rails'
 gem 'dotenv-rails'
 gem 'sweetalert-rails'
 gem 'rails_admin'
+gem 'bootstrap-glyphicons'
 
 gem 'status-page', github: 'qazbnm456/status-page'
 gem 'rancher-api', github: 'qazbnm456/rancher-api'

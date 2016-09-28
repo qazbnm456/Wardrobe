@@ -1,4 +1,5 @@
 @import "compass/css3";
+@import "bootstrap/glyphicons";
 
 html,body {
   width: 100%;
@@ -69,3 +70,17 @@ form {
   100%  { @include transform(rotate(360deg)); }
 }
 @keyframes rotate { @include rotate; }
+
+// fullscreen resize
+.button_container {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  cursor: pointer;
+  z-index: 100;
+  transition: opacity .25s ease;
+
+  &:hover {
+    opacity: .7;
+  }
+}
