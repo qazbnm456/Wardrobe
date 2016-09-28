@@ -53,7 +53,7 @@ class DockerController < ApplicationController
     else
       redirect_to(
           main_app.root_path,
-          :flash => { :alert => "You've excess the limit." }
+          :flash => { :alert => "You've exceeded the maximum number of available instances." }
       )
     end
   end

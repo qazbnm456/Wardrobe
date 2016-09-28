@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 
-gem 'rails', '4.2.7'
+gem 'rails', '4.2.7.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'compass-rails'
@@ -42,6 +42,9 @@ group :development do
   gem 'binding_of_caller'
   gem 'hirb'
   gem 'letter_opener'
+  gem 'bullet'
+  gem 'brakeman', :require => false
+  gem 'lol_dba'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

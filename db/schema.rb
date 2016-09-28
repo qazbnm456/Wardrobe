@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927160336) do
+ActiveRecord::Schema.define(version: 20160928131947) do
 
   create_table "images", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "tag",         limit: 255
     t.text     "description", limit: 65535
     t.datetime "date"
+    t.string   "thumbnail",   limit: 255,   default: "http://www.thatpetplace.com/c.1043140/site/img/photo_na.jpg"
   end
 
   create_table "records", force: :cascade do |t|
@@ -27,6 +28,10 @@ ActiveRecord::Schema.define(version: 20160927160336) do
     t.datetime "updated_at"
     t.integer  "status",     limit: 4, default: 0
   end
+
+  add_index "records", ["image_id", "user_id"], name: "index_records_on_image_id_and_user_id", using: :btree
+  add_index "records", ["image_id"], name: "index_records_on_image_id", using: :btree
+  add_index "records", ["user_id"], name: "index_records_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false

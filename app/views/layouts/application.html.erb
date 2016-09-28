@@ -13,26 +13,34 @@
   <%= render 'layouts/header' %>
   <div class="container">
     <% if notice %>
-        <p class="alert alert-notice tp"><%= notice %></p>
+        <div class="notice color-primary"><%= notice %></div>
     <% end %>
     <% if alert %>
-        <p class="alert alert-error tp"><%= alert %></p>
+        <div class="notice color-warning"><%= alert %></div>
     <% end %>
     <%= yield %>
+    <div class="notice notice-corner color-success">Currently, your quota only allows for ONE instance.</div>
     <%= render 'layouts/footer' %>
+    <% if Rails.env.development? %>
     <div class="columns-12">
       <div class="col-sm-12">
         <div class="panel">
           <div class="panel-box">
-            <%= debug(params) if Rails.env.development? %>
+            <%= debug(params) %>
           </div>
         </div>
       </div>
     </div>
+    <% end %>
   </div>
   <script>
     $(function() {
       $("#crumb").append("<li class=\"crumb-end\"><%= action_name %></li>");
+      window.setTimeout(function() {
+        $(".notice").fadeTo(500, 0).slideUp(500, function(){
+          $(this).remove();
+        });
+      }, 4000);
     });
   </script>
 </body>

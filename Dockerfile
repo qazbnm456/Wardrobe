@@ -32,4 +32,5 @@ COPY . /home/app/wardrobe
 WORKDIR /home/app/wardrobe
 RUN chown -R app:app /home/app/wardrobe \
   && sudo -u app RAILS_ENV=production bundle exec rake assets:precompile \
+  && groupadd -g 999 docker && usermod -a -G docker app \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
