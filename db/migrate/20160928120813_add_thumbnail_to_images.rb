@@ -1,5 +1,5 @@
 class AddThumbnailToImages < ActiveRecord::Migration
   def change
-    add_column :images, :thumbnail, :string, :default => "http://www.thatpetplace.com/c.1043140/site/img/photo_na.jpg"
+    add_column :images, :thumbnail, :string, :default => "https://i.imgur.com/do1g7qu.jpg"
   end
 end

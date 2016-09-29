@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20160928131947) do
     t.string   "tag",         limit: 255
     t.text     "description", limit: 65535
     t.datetime "date"
-    t.string   "thumbnail",   limit: 255,   default: "http://www.thatpetplace.com/c.1043140/site/img/photo_na.jpg"
+    t.string   "thumbnail",   limit: 255,   default: "https://i.imgur.com/do1g7qu.jpg"
   end
 
   create_table "records", force: :cascade do |t|
