@@ -22,7 +22,8 @@ COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 RUN chown -R app.app /tmp \
   && gem install bundler \
-  && bundle install --jobs 40 --retry 10
+  && bundle install --jobs 40 --retry 10 \
+  && gem install tzinfo-data
 # Enable the Nginx service.
 RUN rm -f /etc/service/nginx/down \
   && rm /etc/nginx/sites-enabled/default
