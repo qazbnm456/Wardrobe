@@ -14,7 +14,7 @@ CMD ["/sbin/my_init"]
 #   Build system and git.
 RUN /pd_build/utilities.sh
 #   Ruby support.
-RUN /pd_build/ruby-2.3.5.sh
+RUN /pd_build/ruby-2.3.3.sh
 RUN apt-get update \
   && apt-get install -y sudo lxc
 WORKDIR /tmp
