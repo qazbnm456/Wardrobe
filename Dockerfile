@@ -1,5 +1,13 @@
 FROM phusion/passenger-customizable
 MAINTAINER Boik Su "boik@tdohacker.org"
+EXPOSE 80
+EXPOSE 80/udp
+EXPOSE 2000
+EXPOSE 2000/udp
+EXPOSE 587
+EXPOSE 587/udp
+EXPOSE 3306
+EXPOSE 3306/udp
 
 ENV HOME /root
 ENV RAILS_ENV production
