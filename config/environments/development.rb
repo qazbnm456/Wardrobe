@@ -18,7 +18,7 @@ Rails.application.configure do
 
   # Set up the default URL options for the Devise mailer
   config.action_mailer.delivery_method = :letter_opener
-  config.action_mailer.default_url_options = { protocol: 'https', host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { protocol: 'https', host: 'localhost', port: 2000 }
   config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
 
   # Print deprecation notices to the Rails logger.
