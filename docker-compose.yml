@@ -1,0 +1,14 @@
+version: '2'
+services:
+  daas:
+    image: gr1dd/daas
+    container_name: daas
+    ports:
+      - "80:80"
+      - "80:80/udp"
+      - "587:587"
+      - "587:587/udp"
+      - "3306:3306"
+      - "3306:3306/udp"
+      - "2000:2000"
+      - "2000:2000/udp"
